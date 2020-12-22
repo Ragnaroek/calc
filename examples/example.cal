@@ -1,0 +1,7 @@
+def x (input)
+def z 3
+
+(calculate 
+   (* (+ 1 x) 
+      z 
+      4))

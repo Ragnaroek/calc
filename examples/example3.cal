@@ -1,0 +1,7 @@
+
+def x 1
+def y (input)
+
+(calculate (+ (* 2 x y)
+              (/ 4 2 x)
+              (-)))

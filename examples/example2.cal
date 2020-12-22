@@ -1,0 +1,6 @@
+
+
+def z (input)
+def y (input)
+
+(calculate (+ 100 (* z y)))

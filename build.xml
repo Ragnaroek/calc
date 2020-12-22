@@ -1,0 +1,54 @@
+<project name="calcl-build" default="build">
+    
+	<property name="build" location="build" />
+	<property name="doc" location="doc" />
+	<property name="src" location="src" />
+	<property name="temp_folder" location="${build}/tmp" />
+	<property name="version.major" value="1.0" />
+	
+	
+    <target name="build" depends="compile-source">
+    	<buildnumber/>
+        <jar destfile="${build}/calcl_${version.major}.${build.number}.jar">
+        	<manifest>
+        		<attribute name="Version" value="${version.major}.${build.number}"/>
+            </manifest>
+            
+        	<fileset dir="${temp_folder}">
+        		<include name="**/*.class" />
+        	</fileset>
+        </jar>
+    	
+    	<antcall target="pack-source" />
+    </target>
+	
+	<target name="pack-source">
+		<zip destfile="${build}/calcl_src_${version.major}.${build.number}.zip">
+			<fileset dir="./" >
+				<exclude name="**/build/**" />
+				<exclude name="**/bin/**" />
+				<exclude name="**/.settings/**" />
+				<exclude name="**/*.DS_Store" />
+			</fileset>
+	    </zip>
+    </target>
+	
+	<target name="compile-source" depends="clean">
+		<mkdir dir="${build}" />
+		<mkdir dir="${temp_folder}" />
+		
+		<copy todir="${temp_folder}">
+		  <fileset dir="${src}">
+		    <include name="**/*.java" />
+		  </fileset>
+		</copy>
+		
+		<javac srcdir="${temp_folder}" destdir="${temp_folder}">
+		</javac>
+	</target>
+	
+	<target name="clean">
+		<delete dir="${temp_folder}" />
+	</target>
+
+</project>
